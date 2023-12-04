@@ -22,13 +22,13 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "2512",
         "attempts": [
           "197",
           "4635"
         ],
-        "time": null
+        "time": 0.55225
       },
       "part2": {
         "solved": false,
