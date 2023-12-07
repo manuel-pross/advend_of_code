@@ -6,68 +6,53 @@ const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
   const lines = input.split("\n");
 
-  let wholeSum = 0;
-
-  lines.forEach((line) => {
-    let lineSum = "";
-    let firstDigit = "";
-    let lastDigit = "";
-    for (const char of line) {
-      if (!isNaN(parseInt(char))) {
-        firstDigit = char;
-        break;
-      }
-    }
-    for (let i = line.length - 1; i > -1; i--) {
-      if (!isNaN(parseInt(line[i]))) {
-        lastDigit = line[i];
-        break;
-      }
-    }
-
-    lineSum = firstDigit + lastDigit;
-    wholeSum += parseInt(lineSum);
+  const values = lines.map((line) => {
+    const first = line.split("").find((v) => !Number.isNaN(Number(v)));
+    const last = line
+      .split("")
+      .reverse()
+      .find((v) => !Number.isNaN(Number(v)));
+    return Number(first + last);
   });
 
-  return wholeSum;
+  return values.reduce((s, v) => s + v);
 };
 
 const part2 = (rawInput: string) => {
-  //const input = parseInput(rawInput);
-  const input =
+  let input =
     "two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen";
 
-  const newInput = replaceTextNumbersWithDigits(input);
+  const numbersMap = new Map([
+    ["eight", "8"],
+    ["three", "3"],
+    ["seven", "7"],
+    ["four", "4"],
+    ["five", "5"],
+    ["nine", "9"],
+    ["six", "6"],
+    ["two", "2"],
+    ["one", "1"],
+  ]);
 
-  console.log(newInput);
+  for (let [key, value] of numbersMap) {
+    input = input.replaceAll(key, value);
+  }
+  console.log(input);
 
-  return;
-};
+  const lines = input.split("\n");
 
-function replaceTextNumbersWithDigits(inputString: string): string {
-  const numberWords: { [key: string]: string } = {
-    one: "1",
-    two: "2",
-    three: "3",
-    four: "4",
-    five: "5",
-    six: "6",
-    seven: "7",
-    eight: "8",
-    nine: "9",
-    // Add more as needed
-  };
-
-  // Use a regular expression to match each number word and replace it
-  Object.keys(numberWords).forEach((word) => {
-    const regex = new RegExp(`\\b${word}\\b`, "gi"); // 'gi' for case-insensitive global search
-    inputString = inputString.replace(regex, numberWords[word]);
+  const values = lines.map((line) => {
+    const first = line.split("").find((v) => !Number.isNaN(Number(v)));
+    const last = line
+      .split("")
+      .reverse()
+      .find((v) => !Number.isNaN(Number(v)));
+    console.log(Number(first + last));
+    return Number(first + last);
   });
 
-  return inputString;
-}
-
-// Example usage:
+  return values.reduce((s, v) => s + v);
+};
 
 run({
   part1: {

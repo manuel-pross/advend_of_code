@@ -11,13 +11,13 @@
           "11142",
           "75424797"
         ],
-        "time": 0.9735
+        "time": 0.863521
       },
       "part2": {
         "solved": false,
-        "result": null,
+        "result": "351",
         "attempts": [],
-        "time": null
+        "time": 0.40364
       }
     },
     {
